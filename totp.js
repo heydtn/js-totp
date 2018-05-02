@@ -70,6 +70,7 @@ const jsTOTP = function(time_interval=30) {
 
   // https://github.com/mdp/rotp/blob/ecd702e7e8efcb36743b75bfd408c7854ed7e4f4/lib/rotp/otp.rb#L24
   function generate_otp(input, secret, padded=true) {
+    secret = secret.toLowerCase();
     var digits = 6;
     hmac = atob(b64_hmac_sha1(decode_base32(secret),int_to_bytestring(input)));
     offset = hmac.substr(-1).charCodeAt(0) & 0xf;
@@ -104,7 +105,7 @@ const jsTOTP = function(time_interval=30) {
   */
 
   b64_hmac_sha1 = (function() {
-      var b64pad = "="; /* base-64 pad character. "=" for strict RFC compliance   */
+      var b64pad = ""; /* base-64 pad character. "=" for strict RFC compliance   */
       var chrsz = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
 
       function binb2b64(binarray)
