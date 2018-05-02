@@ -1,6 +1,4 @@
-const jsTOTP = function(interval=30, chr_size=8) {
-  const time_interval = interval;
-  const character_size = chr_size;
+const jsTOTP = function(time_interval=30) {
   // Credit to github:mdp/rotp Ruby One Time Password Library
   // This is a translation of the just the basic functionality of TOTP from ROTP
   // into minimal javascript
@@ -107,7 +105,7 @@ const jsTOTP = function(interval=30, chr_size=8) {
 
   b64_hmac_sha1 = (function() {
       var b64pad = "="; /* base-64 pad character. "=" for strict RFC compliance   */
-      var chrsz = character_size;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
+      var chrsz = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
 
       function binb2b64(binarray)
       {
